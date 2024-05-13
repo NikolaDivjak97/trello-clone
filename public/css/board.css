@@ -1,0 +1,88 @@
+.lists-wrapper {
+    /*min-height: 100vh;*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-board {
+    width: 16rem;
+}
+.cursor {
+    cursor: pointer;
+}
+
+.cursor img {
+    filter: invert(1);
+}
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.bell {
+    position: relative;
+    cursor: pointer;
+}
+
+.max-h-70 {
+    max-height: 70vh;
+}
+
+.members {
+    gap: 0.4rem;
+}
+
+.initials {
+    background-color: orange;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.li-width {
+    min-width: 14rem;
+    height: auto;
+}
+
+.capitalize-underline {
+    text-transform: capitalize;
+    text-decoration: underline;
+}
+
+.bg-orange {
+    background-color: #fcba03;
+}
+
+.m-03 {
+    margin: 3px;
+}
+
+.bg-light-blue {
+    background: #f1f7fe !important;
+}
+
+.pb
+{
+    padding-bottom: 7em;
+}
+
+.min-width-200
+{
+    min-width: 200px;
+}
+
+.object-fit-cover
+{
+    object-fit: cover;
+}
+
+.comment-content img {
+    max-width: 64px;
+}
