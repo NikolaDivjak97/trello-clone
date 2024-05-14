@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="container-xll h-100 overflow-auto p-3">
+        <div class="container-xll h-100 phases_wrapper px-3 pb-1">
             <div class="row flex-nowrap ">
 
                 @foreach ($board -> phases as $phase)

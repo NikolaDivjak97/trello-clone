@@ -1,4 +1,4 @@
-<div class="col flex-grow-0 flex-shrink-1 phase_column pb" data-phase="{{ $phase -> id }}">
+<div class="col flex-grow-0 flex-shrink-1 phase_column pb-4" data-phase="{{ $phase -> id }}">
     <div class="card card-board">
         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
             <span>{{ $phase -> name }}</span>
@@ -8,7 +8,7 @@
                 Add Task
             </button>
         </div>
-        <ul class="list-group list-group-flush overflow-auto max-h-70 sortable">
+        <ul class="list-group list-group-flush overflow-auto max-h sortable">
             @foreach ($phase -> cards() -> orderBy('order', 'asc')->orderBy('updated_at', 'asc')->get() as $card)
                 <li class=" list-group-item cursor open-task draggable li-width" data-card="{{ $card -> id }}"
                     data-url="{{ route ('cards.getData') }}">{{$card -> name }} <br>

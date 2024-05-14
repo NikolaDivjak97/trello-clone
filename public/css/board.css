@@ -1,8 +1,28 @@
 .lists-wrapper {
-    /*min-height: 100vh;*/
+    min-height: calc(100vh - 55px);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.phases_wrapper {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+.phases_wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.phases_wrapper::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5);
+}
+
+.phases_wrapper::-webkit-scrollbar-thumb {
+    background: #6cb2eb;
+}
+
+.phases_wrapper::-webkit-scrollbar-thumb:hover {
+    background: #3490dc;
 }
 
 .card-board {
@@ -26,8 +46,8 @@
     cursor: pointer;
 }
 
-.max-h-70 {
-    max-height: 70vh;
+.max-h {
+    max-height: 63vh;
 }
 
 .members {

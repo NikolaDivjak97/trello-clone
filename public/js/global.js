@@ -1,7 +1,7 @@
 function getUrlParam(name) {
     let url = new URL(window.location.href);
-    let parameter = url.searchParams.get(name);
-    return parameter;
+
+    return url.searchParams.get(name);
 }
 
 function removeParam(key) {
@@ -27,7 +27,7 @@ function removeParam(key) {
 function updateFavicon() {
     let favicon = $('link[rel="icon"]').first();
 
-    if(!favicon) return;
+    if(!favicon || favicon.attr('href').contains('-new')) return;
 
     favicon.attr('href', favicon.attr('href').replace('favicon', 'favicon-new'));
 }
