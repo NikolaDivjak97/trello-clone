@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/board.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
     @yield('css')
 </head>
 <body>

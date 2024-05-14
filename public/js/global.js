@@ -24,9 +24,19 @@ function removeParam(key) {
     window.history.pushState(null, null, rtn);
 }
 
+function updateFavicon() {
+    let favicon = $('link[rel="icon"]').first();
+
+    if(!favicon) return;
+
+    favicon.attr('href', favicon.attr('href').replace('favicon', 'favicon-new'));
+}
+
 function notifyAndUpdate() {
 
     let updatePhases = true;
+
+    updateFavicon();
 
     $.get(r_get_notifications, function (response) {
         if (response.success && response.data?.length) {
@@ -80,8 +90,12 @@ $(document).ready(function () {
     })
     // AJAX setup finish
 
+    $('.notifications-overlay').on('click', function() {
+        $(this).toggle();
+    });
+
     $('.bell').on('click', function () {
-        $('.notifications-tab').toggle('slideLeft');
+        $('.notifications-overlay').toggle();
 
         if ($(this).hasClass('viewed')) return;
 
