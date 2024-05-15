@@ -4,9 +4,34 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+
+        return view('dashboard.users.index', compact('users'));
+    }
+
+    public function table(Request $request)
+    {
+        $users = (new User()) -> query();
+
+        return (new DataTables)->eloquent($users)
+            -> editColumn('team_id', function($user) {
+                return $user -> is_admin ? 'Yes' : 'No';
+            })
+            -> editColumn('team_id', function($user) {
+                return $user -> team ? $user -> team -> name : 'Not in a team';
+            })
+            -> editColumn('created_at', function($event) {
+                return $event -> created_at -> format('d.m.Y H:i');
+            })
+            -> toJson();
+    }
+
     public function profile()
     {
         $user = auth()->user();

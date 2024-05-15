@@ -18,6 +18,8 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.index');
+        $users = User::all(['id', 'name']);
+
+        return view('dashboard.index', compact('users'));
     }
 }

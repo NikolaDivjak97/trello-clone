@@ -60,7 +60,9 @@ class BoardController extends Controller
 
         $board -> users() -> sync(array_unique($boardMembers));
 
-        Notification::notifyAll($board -> owner, $board, $board -> users, 'created');
+        $eventMessage = 'User' . $board -> owner -> name . ' created board ' . $board -> name;
+
+        Notification::notifyAll($board -> owner, $board, $board -> users, 'created', $eventMessage);
 
         return redirect('/')->with('success');
     }
@@ -96,8 +98,9 @@ class BoardController extends Controller
         }
 
         $usersToNotify = (new User()) -> whereIn('id', $validated['selectMembersBoard'])->get();
+        $eventMessage = 'User ' . $board -> owner -> name . ' invited new users to board' . $board -> name;
 
-        Notification::notifyAll($board -> owner, $board, $usersToNotify, 'created');
+        Notification::notifyAll($board -> owner, $board, $usersToNotify, 'created', $eventMessage);
 
         return redirect('/boards/' . $board->id);
     }

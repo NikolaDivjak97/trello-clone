@@ -23,7 +23,9 @@ class CardController extends Controller
         $card -> users() -> sync($request->members ?? []);
         $card -> labels() -> sync($request->labels ?? []);
 
-        Notification::notifyAll($card -> owner, $card, $card -> users, 'created');
+        $eventMessage = 'User ' . $card -> owner -> name . ' created card: ' . $card -> name;
+
+        Notification::notifyAll($card -> owner, $card, $card -> users, 'created', $eventMessage);
 
         return new JsonResponse(['message' => 'Card created successfully!']);
     }
@@ -60,8 +62,9 @@ class CardController extends Controller
 
         $card -> save();
 
-        // When changing phase notify all except user that moved the card
-        Notification::notifyAll(auth()->user(), $card, $card -> users, 'update_phase');
+        $eventMessage = 'User ' . auth()->user()->name . ' moved card ' . $card -> name .' to list' . $card -> phase -> name;
+
+        Notification::notifyAll(auth()->user(), $card, $card -> users, 'update_phase', $eventMessage);
 
         return new JsonResponse(['success' => true, 'message' => 'Card phase updated successfully!']);
     }
@@ -89,8 +92,9 @@ class CardController extends Controller
         }
 
         $usersToNotify = (new User()) -> whereIn('id', $request -> members)->get();
+        $eventMessage = 'User ' . auth() -> user()->name . ' invited new members to card: ' . $card -> name;
 
-        Notification::notifyAll(auth()->user(), $card, $usersToNotify, 'update_members');
+        Notification::notifyAll(auth()->user(), $card, $usersToNotify, 'update_members', $eventMessage);
 
         return new JsonResponse(['success' => true, 'message' => 'Card members updated successfully!']);
     }
@@ -114,7 +118,9 @@ class CardController extends Controller
             'description' => $request -> comment
         ]);
 
-        Notification::notifyAll(auth() -> user(), $comment, $card -> users, 'created');
+        $eventMessage = 'User ' . auth() -> user() -> name . ' commented on card: ' . $card -> name;
+
+        Notification::notifyAll(auth() -> user(), $comment, $card -> users, 'created', $eventMessage);
 
         return new JsonResponse(['success' => true, 'message' => 'You commented successfully!']);
     }
@@ -177,7 +183,9 @@ class CardController extends Controller
             ]);
         }
 
-        Notification::notifyAll(auth() -> user(), $card, $card -> users, 'new_images');
+        $eventMessage = 'User ' . auth() -> user() -> name  . ' added new images to card:' . $card -> name;
+
+        Notification::notifyAll(auth() -> user(), $card, $card -> users, 'new_images', $eventMessage);
 
         return new JsonResponse(['success' => true, 'message' => 'Images added successfully!']);
     }
@@ -204,7 +212,10 @@ class CardController extends Controller
             'path' => $attachment -> hashName()
         ]);
 
-        Notification::notifyAll(auth() -> user(), $card, $card -> users, 'new_attachment');
+        $eventMessage = 'User ' . auth() -> user() -> name . ' added new attachment to card:' . $card -> name;
+
+
+        Notification::notifyAll(auth() -> user(), $card, $card -> users, 'new_attachment', $eventMessage);
 
         return new JsonResponse(['success' => true, 'message' => 'Attachment added successfully!']);
     }

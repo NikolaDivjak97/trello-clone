@@ -28,6 +28,7 @@
 .card-board {
     width: 16rem;
 }
+
 .cursor {
     cursor: pointer;
 }
@@ -35,6 +36,7 @@
 .cursor img {
     filter: invert(1);
 }
+
 .title {
     font-weight: bold;
     font-size: 18px;
@@ -46,6 +48,9 @@
     cursor: pointer;
 }
 
+.min-h {
+    min-height: 75vh;
+}
 .max-h {
     max-height: 63vh;
 }
@@ -88,18 +93,15 @@
     background: #f1f7fe !important;
 }
 
-.pb
-{
+.pb {
     padding-bottom: 7em;
 }
 
-.min-width-200
-{
+.min-width-200 {
     min-width: 200px;
 }
 
-.object-fit-cover
-{
+.object-fit-cover {
     object-fit: cover;
 }
 

@@ -1,4 +1,4 @@
-<div class="col flex-grow-0 flex-shrink-1 phase_column pb-4" data-phase="{{ $phase -> id }}">
+<div class="col flex-grow-0 flex-shrink-1 phase_column min-h pb-4" data-phase="{{ $phase -> id }}">
     <div class="card card-board">
         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
             <span>{{ $phase -> name }}</span>

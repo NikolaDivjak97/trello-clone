@@ -17,11 +17,13 @@
     <script src="{{ asset('js/global.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.css') }}">
     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
@@ -35,16 +37,13 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'TrelloClone') }}
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <button type="button" id="sidebarCollapse" class="btn btn-light">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <li>
+                        <span class="navbar-toggler-icon" id="sidebarCollapse"></span>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -89,14 +88,13 @@
 
     <div class="wrapper">
         <nav id="sidebar">
-{{--            <div class="sidebar-header">--}}
-{{--                <h3>Bootstrap Sidebar</h3>--}}
-{{--            </div>--}}
+            <div class="sidebar-header">
+                <h4 class="mb-0">Dashboard</h4>
+            </div>
 
             <ul class="list-unstyled components">
-{{--                <p>Dummy Heading</p>--}}
-                <li>
-                    <a href="#">About</a>
+                <li class="{{ request()->routeIs('users.index') ? 'active' : '' }}">
+                    <a href="{{ route('users.index') }}">Users</a>
                 </li>
 {{--                <li>--}}
 {{--                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>--}}

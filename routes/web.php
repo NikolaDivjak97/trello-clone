@@ -55,8 +55,18 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/', 'HomeController@dashboard')->name('dashboard.index');
 
+        // Users
+        Route::post('users/table', [\App\Http\Controllers\UserController::class, 'table']) -> name('users.table');
+        Route::resource('users', UserController::class);
+
         // Teams
         Route::resource('teams', TeamController::class);
+
+        // Events
+        Route::post('events/table', [\App\Http\Controllers\EventController::class, 'table']) -> name('events.table');
+
+        // Notifications
+        Route::post('notifications/table', [\App\Http\Controllers\NotificationController::class, 'table']) -> name('notifications.table');
 
     });
 

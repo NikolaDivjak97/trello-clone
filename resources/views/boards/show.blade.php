@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $board -> name . ' | TROLLO')
+@section('title', $board -> name . ' | Trello clone')
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/richtext.min.css') }}">
@@ -12,25 +12,6 @@
 
     .board-name {
         backdrop-filter: blur(10px);
-    }
-
-    #mentionDropdown {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        z-index: 1;
-    }
-
-    #mentionDropdown div {
-        padding: 8px;
-        cursor: pointer;
-    }
-
-    #mentionDropdown div:hover {
-        background-color: #f2f2f2;
     }
 
     .modal-xl {
@@ -78,12 +59,6 @@
     @include('modals.add-members-board')
     @include('modals.add-new-task')
 
-</div>
-
-<div id="mentionDropdown">
-    @foreach($users as $user)
-        <div class="mention">{{ $user -> name }}</div>
-    @endforeach
 </div>
 
 <div class="modal fade" id="taskDetailsModal" tabindex="-1" role="dialog" aria-labelledby="taskDetailsModalLabel"
