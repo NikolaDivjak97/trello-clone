@@ -60,7 +60,7 @@ class BoardController extends Controller
 
         $board -> users() -> sync(array_unique($boardMembers));
 
-        $eventMessage = 'User' . $board -> owner -> name . ' created board ' . $board -> name;
+        $eventMessage = 'User ' . $board -> owner -> name . ' created board ' . $board -> name;
 
         Notification::notifyAll($board -> owner, $board, $board -> users, 'created', $eventMessage);
 
@@ -103,5 +103,29 @@ class BoardController extends Controller
         Notification::notifyAll($board -> owner, $board, $usersToNotify, 'created', $eventMessage);
 
         return redirect('/boards/' . $board->id);
+    }
+
+    public function destroy(Board $board)
+    {
+        $user = auth() -> user();
+        $eventMessage = 'User ' . $user -> name . ' deleted the board: ' . $board -> name;
+
+        Notification::notifyAll($user, $board, $board -> users, 'board_delete', $eventMessage);
+
+        $board -> delete();
+
+        return redirect('/')->with(['success' => 'You deleted the board ' . $board -> name]);
+    }
+
+    public function leaveBoard(Board $board)
+    {
+        $user = auth()-> user();
+
+        $board -> users() -> detach($user -> id);
+        $eventMessage = 'User ' . $user -> name . ' left the board: ' . $board -> name;
+
+        Notification::notifyAll($user, $board, [$board -> owner], 'board_leave', $eventMessage);
+
+        return redirect('/')->with(['success' => 'You left the board ' . $board -> name]);
     }
 }

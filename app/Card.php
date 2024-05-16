@@ -40,6 +40,16 @@ class Card extends Model
     protected $guarded = ['id'];
     protected $dates = ['due_date'];
 
+    protected static function booted()
+    {
+        static::deleting(function ($card) {
+            $card -> images() -> delete();
+            $card -> attachments() -> delete();
+            $card -> comments() -> delete();
+            $card -> labels() -> sync([]);
+        });
+    }
+
     public function owner(): BelongsTo
     {
         return $this -> belongsTo(User::class, 'user_id');

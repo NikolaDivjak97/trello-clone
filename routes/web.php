@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Boards
     Route::post('/sync-users', [App\Http\Controllers\BoardController::class, 'syncUsers'])->name('boards.syncUsers');
+    Route::post('/boards/{board}/leave', [App\Http\Controllers\BoardController::class, 'leaveBoard'])->name('boards.leave');
     Route::resource('boards', BoardController::class);
 
     // Phases

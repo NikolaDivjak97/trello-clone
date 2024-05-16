@@ -30,6 +30,15 @@ class Phase extends Model
 {
     protected $guarded = [];
 
+    protected static function booted()
+    {
+        static::deleting(function ($phase) {
+            $phase -> cards() -> each(function ($card) {
+                $card->delete();
+            });
+        });
+    }
+
     public function board(): BelongsTo
     {
         return $this->belongsTo(Board::class);

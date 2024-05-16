@@ -20,6 +20,15 @@
 @section('content')
     <div class="container">
         <div class="row my-5">
+
+            @if(session('success'))
+                <div class="col-12">
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
             <div class="col-12 mb-2 text-light">
                 <h3 class="p-3 bg-light-blue text-dark rounded w-100">Boards</h3>
             </div>

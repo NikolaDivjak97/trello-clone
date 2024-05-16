@@ -9,7 +9,7 @@
 
     <h3 class="my-4">User activity</h3>
 
-    <table id="user-events" class="table table-striped" style="width:100%">
+    <table id="user-events" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
             <th>User</th>
@@ -73,7 +73,7 @@
 
     </form>
 
-    <table id="user-activity" class="table table-striped" style="width:100%">
+    <table id="user-activity" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
             <th>Created notification</th>

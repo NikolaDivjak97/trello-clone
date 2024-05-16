@@ -84,6 +84,18 @@ class Notification extends Model
                             $notification->save();
 
                             break;
+                        case 'board_leave':
+                            $notification->link = '';
+                            $notification->message = 'User ' . $owner->name . ' left the board ' . $model->name;
+                            $notification->save();
+
+                            break;
+                        case 'board_delete':
+                            $notification->link = '';
+                            $notification->message = 'User ' . $owner->name . ' deleted the board ' . $model->name;
+                            $notification->save();
+
+                            break;
                         default:
                             $notification->delete();
                     }

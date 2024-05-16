@@ -63,10 +63,15 @@ function initDraggable() {
 //FINISH DRAG AND DROP
 
 $(document).ready(function () {
-    var data;
+    let data;
 
     // Instantiate draggable class on components
     initDraggable();
+
+    // Trigger open modal after event is registered
+    if (getUrlParam('card')) {
+        renderCardDataModal();
+    }
 
     $('#taskDesc').richText({table: false, code: false});
 
@@ -88,38 +93,6 @@ $(document).ready(function () {
             $(this).hide();
         }
     });
-    // .on('keydown', '.richText-editor', function(e) {
-    //     const inputValue = $(this).text();
-    //     const mentionIndex = inputValue.lastIndexOf('@');
-    //     const mentionDropdown = $('#mentionDropdown');
-    //
-    //     if (mentionIndex !== -1) {
-    //         const mentionText = inputValue.substring(mentionIndex + 1);
-    //
-    //         mentionDropdown.find('div').each(function() {
-    //             if($(this).text().toLowerCase().startsWith(mentionText.toLowerCase())) {
-    //                 $(this).show();
-    //
-    //                 return;
-    //             }
-    //
-    //             $(this).hide();
-    //         });
-    //
-    //         if(!$(this).children().first().length) return;
-    //
-    //         // Position dropdown below input field
-    //         const inputRect = $(this).children().first().getBoundingClientRect();
-    //         mentionDropdown.css({
-    //             top: inputRect.bottom + 'px',
-    //             left: inputRect.left + 'px',
-    //             zIndex: '1100',
-    //             display: 'block'
-    //         });
-    //     } else {
-    //         mentionDropdown.hide();
-    //     }
-    // });
 
     // Modal events
     $('#taskDetailsModal').on('hidden.bs.modal', function () {
@@ -181,11 +154,6 @@ $(document).ready(function () {
         })
     });
 
-    // Trigger open modal after event is registered
-    if (getUrlParam('card')) {
-        renderCardDataModal();
-    }
-
     //  update card  members
     $('main').on('input', '#memberSearch', function () {
         var searchText = $(this).val().toLowerCase();
@@ -213,7 +181,7 @@ $(document).ready(function () {
             }
         });
     });
-    //finish card memebers update
+    //finish card members update
 
     $('#taskDetailsModal').on('click', '.add-comment', function() {
         let btn = $(this);

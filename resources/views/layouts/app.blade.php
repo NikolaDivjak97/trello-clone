@@ -30,7 +30,7 @@
 <body>
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: sticky; top: 0; left: 0;, width: 100; z-index: 1000;">
             <div class="container-fluid w-full px-5">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'TrelloClone') }}
@@ -114,7 +114,7 @@
             </div>
         </nav>
 
-        @include('components.notifications', ['notifications' => auth()->user() ? auth()->user()->notifications() -> where('is_seen', false) -> get() : []])
+        @include('components.notifications', ['notifications' => auth()->user() ? auth()->user()->notifications() -> where('is_seen', false) -> orderBy('created_at', 'desc') -> get() : []])
 
         <main style="position: relative;">
             @yield('content')

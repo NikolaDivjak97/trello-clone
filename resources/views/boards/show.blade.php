@@ -11,6 +11,8 @@
     }
 
     .board-name {
+        position: relative;
+        z-index: 10;
         backdrop-filter: blur(10px);
     }
 
@@ -27,22 +29,45 @@
     <div class="lists-wrapper bg-white text-dark">
         <div class="board-name p-3 bg-transparent text-white d-flex justify-content-between align-items-center">
             <h1 class="mb-0">{{ $board -> name }}</h1>
-            <div class="board-options">
+            <div class="board-options d-flex align-items-center">
                 @if(auth()->id() === $board -> user_id)
-                    <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addBoardMembers">Manage members</a>
+                    <a class="btn btn-sm btn-primary mr-2" data-toggle="modal" data-target="#addBoardMembers">Manage members</a>
                 @endif
-                <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addLabelModal">Add label</a>
+                <a class="btn btn-sm btn-primary mr-2" data-toggle="modal" data-target="#addLabelModal">Add label</a>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-primary" type="button" data-toggle="dropdown">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right text-center p-2">
+                        @if(auth()->user()->id == $board -> owner -> id)
+                            <form id="delete-board" action="{{route('boards.destroy', $board) }}" method="POST">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-block btn-outline-danger" ><b>Delete board</b></button>
+                            </form>
+                        @else
+                            <form id="leave-board" action="{{route('boards.leave', $board) }}" method="POST">
+
+                                @csrf
+
+                                <button type="submit" class="btn btn-block btn-outline-danger" ><b>Leave board</b></button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="container-xll h-100 phases_wrapper px-3 pb-1">
-            <div class="row flex-nowrap ">
+        <div class="container-xll h-100 phases_wrapper px-3 py-1">
+            <div class="row flex-nowrap">
 
                 @foreach ($board -> phases as $phase)
                     @include('phases.one-phase', ['phase' => $phase])
                 @endforeach
 
-                <div class="col">
+                <div class="col min-h">
                     <div class="card card-board">
                         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center gap-2 cursor" data-toggle="modal" data-target="#addListModal">
                             <img width="24" height="24" src="{{ asset('images/plus.png') }}" alt="">
@@ -75,6 +100,7 @@
         const r_add_images = "{{ route('cards.addImages') }}";
         const r_add_attachment = "{{ route('cards.addAttachment') }}";
         const r_get_phase_column = "{{ route('phases.getCardsComponent') }}";
+
     </script>
 
     <script src="{{ asset ('js/board.js') }}"></script>

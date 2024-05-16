@@ -15,7 +15,7 @@
         width: 30%;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: calc(100vh - 55px);
         overflow-y: scroll;
         z-index: 100;
     }

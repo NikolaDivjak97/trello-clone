@@ -33,6 +33,17 @@ class Board extends Model
 {
     protected $guarded = ['id'];
 
+    protected static function booted()
+    {
+        static::deleting(function ($board) {
+            $board -> users() -> sync([]);
+            $board -> labels() -> delete();
+            $board->phases->each(function ($phase) {
+                $phase->delete();
+            });
+        });
+    }
+
     public function owner(): BelongsTo
     {
         return $this -> belongsTo(User::class, 'user_id');
