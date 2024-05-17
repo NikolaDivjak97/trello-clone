@@ -10,9 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-
-        return view('dashboard.users.index', compact('users'));
+        return view('dashboard.users.index');
     }
 
     public function table(Request $request)
@@ -20,9 +18,6 @@ class UserController extends Controller
         $users = (new User()) -> query();
 
         return (new DataTables)->eloquent($users)
-            -> editColumn('team_id', function($user) {
-                return $user -> is_admin ? 'Yes' : 'No';
-            })
             -> editColumn('team_id', function($user) {
                 return $user -> team ? $user -> team -> name : 'Not in a team';
             })

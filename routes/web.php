@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('users', UserController::class);
 
         // Teams
+        Route::post('teams/table', [\App\Http\Controllers\TeamController::class, 'table']) -> name('teams.table');
         Route::resource('teams', TeamController::class);
 
         // Events
@@ -68,6 +69,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Notifications
         Route::post('notifications/table', [\App\Http\Controllers\NotificationController::class, 'table']) -> name('notifications.table');
+
+        // Boards
+        Route::post('boards/table', [\App\Http\Controllers\BoardController::class, 'table']) -> name('boards.table');
 
     });
 

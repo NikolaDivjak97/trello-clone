@@ -8,9 +8,14 @@ use App\Board;
 use App\Image;
 use App\Notification;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class BoardController extends Controller
 {
+    public function index()
+    {
+        return view('dashboard.boards.index');
+    }
     public function store(Request $request)
     {
         //  TODO: Make Custom Request?
@@ -127,5 +132,29 @@ class BoardController extends Controller
         Notification::notifyAll($user, $board, [$board -> owner], 'board_leave', $eventMessage);
 
         return redirect('/')->with(['success' => 'You left the board ' . $board -> name]);
+    }
+
+    public function table(Request $request)
+    {
+        $boards = (new Board()) -> query();
+
+        return (new DataTables)->eloquent($boards)
+            ->editColumn('user_id', function($board) {
+                return $board -> owner -> name;
+            })
+            -> addColumn('members', function($board) {
+                $html = '';
+
+                foreach($board -> users as $user) {
+                    $html .= '<span class="badge badge-primary p-1 m-1">' . $user -> name . '</span>';
+                }
+
+                return $html ?: 'None';
+            })
+            -> editColumn('created_at', function($board) {
+                return $board -> created_at -> format('d.m.Y H:i');
+            })
+            -> rawColumns(['members'])
+            -> toJson();
     }
 }

@@ -13,9 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
     <script src="{{ asset('vendor/select2/js/select2.js') }}" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('js/global.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/utils.js') }}" defer></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js" defer></script>
     <!-- Fonts -->
@@ -41,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li>
+                    <li style="cursor: pointer">
                         <span class="navbar-toggler-icon" id="sidebarCollapse"></span>
                     </li>
                 </ul>
@@ -60,6 +58,9 @@
                         @endif
                     @else
                         <li class="nav-item d-flex align-items-center gap-2 position-relative">
+
+                            <span class="badge badge-info text-white rounded p-2" id="important-info" style="cursor: pointer" title="CRUD operations not available on Demo version">?</span>
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                 {{ Auth::user()->name }}
                             </a>
@@ -89,27 +90,19 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h4 class="mb-0">Dashboard</h4>
+                <h5 class="mb-0"><a href="{{ route('dashboard.index') }}">Dashboard</a></h5>
             </div>
 
             <ul class="list-unstyled components">
                 <li class="{{ request()->routeIs('users.index') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}">Users</a>
                 </li>
-{{--                <li>--}}
-{{--                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>--}}
-{{--                    <ul class="collapse list-unstyled" id="pageSubmenu">--}}
-{{--                        <li>--}}
-{{--                            <a href="#">Page 1</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">Page 2</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">Page 3</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="{{ request()->routeIs('teams.index') ? 'active' : '' }}">
+                    <a href="{{ route('teams.index') }}">Teams</a>
+                </li>
+                <li class="{{ request()->routeIs('boards.index') ? 'active' : '' }}">
+                    <a href="{{ route('boards.index') }}">Boards</a>
+                </li>
             </ul>
         </nav>
 
@@ -122,6 +115,7 @@
 
 <script>
     $(document).ready(function () {
+
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });

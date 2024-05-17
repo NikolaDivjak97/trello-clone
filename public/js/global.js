@@ -82,14 +82,6 @@ $(document).ready(function () {
     $('#teams').select2({ width: '100%' });
     $('#selectMemberBoard').select2({ width: '100%' });
 
-    // AJAX setup start
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-    })
-    // AJAX setup finish
-
     $('.notifications-overlay').on('click', function() {
         $(this).toggle();
     });
