@@ -27,7 +27,7 @@ function removeParam(key) {
 function updateFavicon() {
     let favicon = $('link[rel="icon"]').first();
 
-    if(!favicon || favicon.attr('href').contains('-new')) return;
+    if(!favicon || favicon.attr('href').includes('-new')) return;
 
     favicon.attr('href', favicon.attr('href').replace('favicon', 'favicon-new'));
 }
